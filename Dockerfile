@@ -1,15 +1,17 @@
 # Use Java 21 as the base image
 FROM openjdk:21-jdk-slim
 
-# Set working directory
+# Set the working directory
 WORKDIR /app
 
-# Copy and build the application
+# Copy project files
 COPY . .
-RUN ./mvnw clean package -DskipTests
 
-# Expose the necessary port
+# Build the application with Java 21
+RUN mvn clean package -DskipTests
+
+# Expose the application's port
 EXPOSE 8080
 
 # Run the application
-CMD ["java", "-jar", "target/your-app.jar"]
+CMD ["java", "-jar", "target/*.jar"]
